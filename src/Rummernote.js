@@ -74,18 +74,13 @@ export default class Rummernote extends React.Component<Props, State> {
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
+        this.editor.summernote(this.options);
         this.applyStatus();
-
-        if (prevProps.value !== this.state.value) {
-            this.applyNewContent();
-        }
+        this.applyNewContent();
     }
 
     componentDidMount() {
         this.editor = $(`#${this.uid}`);
-        this.editor.summernote(this.options);
-        this.applyStatus();
-        this.applyNewContent();
     }
 
     componentWillUnmount() {
