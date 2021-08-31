@@ -67,10 +67,18 @@ export default class Rummernote extends React.Component<Props, State> {
         };
         this.options.popatmouse = false;
         this.options.placeholder = props.placeholder;
+
+        this.state = {
+            value: props.value,
+        }
     }
 
     componentDidUpdate(prevProps: Props, prevState: State) {
         this.applyStatus();
+
+        if (prevState.value !== this.state.value) {
+            this.applyNewContent();
+        }
     }
 
     componentDidMount() {
@@ -99,7 +107,7 @@ export default class Rummernote extends React.Component<Props, State> {
     };
 
     applyNewContent = () => {
-        const {value} = this.props;
+        const {value} = this.state;
         this.editor.summernote('code', value);
     };
 
@@ -120,8 +128,8 @@ export default class Rummernote extends React.Component<Props, State> {
     };
 
     render() {
-        const {value, className} = this.props;
-        const html = value;
+        const {className} = this.props;
+        const html = this.state.value;
         return (
             <div className={`rummernote-wrapper ${className || ''}`.trim()}>
                 <div id={this.uid} dangerouslySetInnerHTML={{__html: html}} />
