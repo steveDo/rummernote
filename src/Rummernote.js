@@ -76,7 +76,7 @@ export default class Rummernote extends React.Component<Props, State> {
     componentDidUpdate(prevProps: Props, prevState: State) {
         this.applyStatus();
 
-        if (prevState.value !== this.state.value) {
+        if (prevProps.value !== this.state.value) {
             this.applyNewContent();
         }
     }
